@@ -11,7 +11,7 @@
  Target Server Version : 50720
  File Encoding         : 65001
 
- Date: 26/06/2018 15:36:57
+ Date: 11/07/2018 10:36:30
 */
 
 SET NAMES utf8mb4;
@@ -31,9 +31,7 @@ CREATE TABLE `app_approvals`  (
   `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `app_approvals_app_id_fkey`(`app_id`) USING BTREE,
-  INDEX `app_approvals_user_id_fkey`(`user_id`) USING BTREE,
-  CONSTRAINT `app_approvals_app_id_fkey` FOREIGN KEY (`app_id`) REFERENCES `apps` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `app_approvals_user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `sys_users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  INDEX `app_approvals_user_id_fkey`(`user_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -147,9 +145,7 @@ CREATE TABLE `app_notices`  (
   `state` longtext CHARACTER SET utf8 COLLATE utf8_bin,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `app_notices_app_id_fkey`(`app_id`) USING BTREE,
-  INDEX `app_notices_user_id_fkey`(`user_id`) USING BTREE,
-  CONSTRAINT `app_notices_app_id_fkey` FOREIGN KEY (`app_id`) REFERENCES `apps` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `app_notices_user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `sys_users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  INDEX `app_notices_user_id_fkey`(`user_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -247,8 +243,7 @@ CREATE TABLE `apps`  (
   `state` longtext CHARACTER SET utf8 COLLATE utf8_bin,
   `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `apps_user_id_fkey`(`user_id`) USING BTREE,
-  CONSTRAINT `apps_user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `sys_users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  INDEX `apps_user_id_fkey`(`user_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -844,7 +839,7 @@ INSERT INTO `mt_records` VALUES (11, 6, '2018-06-15', 'admin', NULL);
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_annoncements`;
 CREATE TABLE `sys_annoncements`  (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `group_id` int(11) DEFAULT NULL,
   `path` longtext CHARACTER SET utf8 COLLATE utf8_bin,
@@ -852,9 +847,8 @@ CREATE TABLE `sys_annoncements`  (
   `create_by` longtext CHARACTER SET utf8 COLLATE utf8_bin,
   `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `sys_annoncements_group_id_fkey`(`group_id`) USING BTREE,
-  CONSTRAINT `sys_annoncements_group_id_fkey` FOREIGN KEY (`group_id`) REFERENCES `sys_groups` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+  INDEX `sys_annoncements_group_id_fkey`(`group_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_annoncements
@@ -878,19 +872,60 @@ INSERT INTO `sys_annoncements` VALUES (18, '1111', 2, 'uploads/123.txt', '2018-0
 INSERT INTO `sys_annoncements` VALUES (20, '测试公告', 4, 'uploads/新建文本文档.txt', '2018-06-21 01:22:38', 'aaa', '123');
 
 -- ----------------------------
+-- Table structure for sys_btypes
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_btypes`;
+CREATE TABLE `sys_btypes`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `enterprise` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `contacts` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `phone` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `faxes` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `taxId` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `bank` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_btypes
+-- ----------------------------
+INSERT INTO `sys_btypes` VALUES (1, '123456', '123', '123', '123', '123', '123', '123', '123', '123');
+
+-- ----------------------------
+-- Table structure for sys_conditions
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_conditions`;
+CREATE TABLE `sys_conditions`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_conditions
+-- ----------------------------
+INSERT INTO `sys_conditions` VALUES (1, '在用', '123');
+INSERT INTO `sys_conditions` VALUES (2, '待检', '123');
+INSERT INTO `sys_conditions` VALUES (3, '停用', '123');
+INSERT INTO `sys_conditions` VALUES (4, '报废', '123');
+
+-- ----------------------------
 -- Table structure for sys_groups
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_groups`;
 CREATE TABLE `sys_groups`  (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `parent_id` int(11) DEFAULT NULL,
   `sn` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `name` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `sys_groups_parent_id_fkey`(`parent_id`) USING BTREE,
-  CONSTRAINT `sys_groups_parent_id_fkey` FOREIGN KEY (`parent_id`) REFERENCES `sys_groups` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+  INDEX `sys_groups_parent_id_fkey`(`parent_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 32 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_groups
@@ -908,36 +943,92 @@ INSERT INTO `sys_groups` VALUES (10, 3, '10023', '三中队', '12345');
 INSERT INTO `sys_groups` VALUES (11, 4, '10031', '一中队', '12345');
 INSERT INTO `sys_groups` VALUES (12, 4, '10032', '二中队', '12345');
 INSERT INTO `sys_groups` VALUES (13, 4, '10033', '三中队', '12345');
-INSERT INTO `sys_groups` VALUES (18, 2, '15001', '四中队', '11');
-INSERT INTO `sys_groups` VALUES (27, 2, '15002', '五中队', '12');
+INSERT INTO `sys_groups` VALUES (18, 2, '15001', '四中队', '12345');
+INSERT INTO `sys_groups` VALUES (27, 2, '15002', '五中队', '12345');
+INSERT INTO `sys_groups` VALUES (28, 4, '10034', '四中队', '12345');
+INSERT INTO `sys_groups` VALUES (29, 3, '10024', '四中队', '12345');
 
 -- ----------------------------
--- Table structure for sys_log
+-- Table structure for sys_logs
 -- ----------------------------
-DROP TABLE IF EXISTS `sys_log`;
-CREATE TABLE `sys_log`  (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `sys_logs`;
+CREATE TABLE `sys_logs`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `ts` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
   `data` json,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 159 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Table structure for sys_majors
+-- Records of sys_logs
 -- ----------------------------
-DROP TABLE IF EXISTS `sys_majors`;
-CREATE TABLE `sys_majors`  (
-  `id` int(11) NOT NULL,
-  `name` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin,
+INSERT INTO `sys_logs` VALUES (147, '2018-07-10 15:42:42.000000', '{\"ip\": \"::ffff:127.0.0.1\", \"method\": \"DELETE\", \"status\": 404, \"originalUrl\": \"/btype/deleteItem?0=1\"}');
+INSERT INTO `sys_logs` VALUES (148, '2018-07-10 15:42:57.000000', '{\"ip\": \"::ffff:127.0.0.1\", \"method\": \"DELETE\", \"status\": 404, \"originalUrl\": \"/group/deleteItem?id=31\"}');
+INSERT INTO `sys_logs` VALUES (149, '2018-07-10 15:46:09.000000', '{\"ip\": \"::ffff:127.0.0.1\", \"method\": \"DELETE\", \"status\": 404, \"originalUrl\": \"/group/deleteItem?id=31\"}');
+INSERT INTO `sys_logs` VALUES (150, '2018-07-10 15:46:43.000000', '{\"ip\": \"::ffff:127.0.0.1\", \"method\": \"DELETE\", \"status\": 200, \"originalUrl\": \"/group/deleteItem?id=31\"}');
+INSERT INTO `sys_logs` VALUES (151, '2018-07-10 15:46:55.000000', '{\"ip\": \"::ffff:127.0.0.1\", \"method\": \"PUT\", \"status\": 200, \"originalUrl\": \"/group/updateItem?id=31&sn=10035&name=%E4%BA%94%E4%B8%AD%E9%98%9F&remark=11111\"}');
+INSERT INTO `sys_logs` VALUES (152, '2018-07-10 15:47:42.000000', '{\"ip\": \"::ffff:127.0.0.1\", \"method\": \"DELETE\", \"status\": 404, \"originalUrl\": \"/group/deleteItem?id=31\"}');
+INSERT INTO `sys_logs` VALUES (153, '2018-07-10 15:48:02.000000', '{\"ip\": \"::ffff:127.0.0.1\", \"method\": \"DELETE\", \"status\": 404, \"originalUrl\": \"/group/deleteItem?id=27\"}');
+INSERT INTO `sys_logs` VALUES (154, '2018-07-10 15:49:11.000000', '{\"ip\": \"::ffff:127.0.0.1\", \"method\": \"DELETE\", \"status\": 404, \"originalUrl\": \"/user/deleteItem?0=1\"}');
+INSERT INTO `sys_logs` VALUES (155, '2018-07-10 15:49:40.000000', '{\"ip\": \"::ffff:127.0.0.1\", \"method\": \"DELETE\", \"status\": 200, \"originalUrl\": \"/user/deleteItem?0=1\"}');
+INSERT INTO `sys_logs` VALUES (156, '2018-07-10 15:50:36.000000', '{\"ip\": \"::ffff:127.0.0.1\", \"method\": \"DELETE\", \"status\": 200, \"originalUrl\": \"/user/deleteItem?0=1\"}');
+INSERT INTO `sys_logs` VALUES (157, '2018-07-10 15:51:15.000000', '{\"ip\": \"::ffff:127.0.0.1\", \"method\": \"DELETE\", \"status\": 200, \"originalUrl\": \"/user/deleteItem?0=1\"}');
+INSERT INTO `sys_logs` VALUES (158, '2018-07-10 15:53:40.000000', '{\"ip\": \"::ffff:127.0.0.1\", \"method\": \"DELETE\", \"status\": 200, \"originalUrl\": \"/group/deleteItem?id=%7B%22id%22:31,%22parent_id%22:4,%22name%22:%22%E4%BA%94%E4%B8%AD%E9%98%9F%22,%22sn%22:%2210035%22,%22remark%22:%2211111%22%7D\"}');
+
+-- ----------------------------
+-- Table structure for sys_maintains
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_maintains`;
+CREATE TABLE `sys_maintains`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of sys_majors
+-- Records of sys_maintains
 -- ----------------------------
-INSERT INTO `sys_majors` VALUES (1, '测试专业', NULL);
-INSERT INTO `sys_majors` VALUES (2, '测试专业123', NULL);
+INSERT INTO `sys_maintains` VALUES (1, '常见故障维修', '123');
+INSERT INTO `sys_maintains` VALUES (2, '计划项目维修', '123');
+
+-- ----------------------------
+-- Table structure for sys_malfunctions
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_malfunctions`;
+CREATE TABLE `sys_malfunctions`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_malfunctions
+-- ----------------------------
+INSERT INTO `sys_malfunctions` VALUES (1, '自然磨损', '123');
+INSERT INTO `sys_malfunctions` VALUES (2, '违规使用', '123');
+INSERT INTO `sys_malfunctions` VALUES (3, '配件质量差', '123');
+INSERT INTO `sys_malfunctions` VALUES (4, '其他', '123');
+
+-- ----------------------------
+-- Table structure for sys_measurements
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_measurements`;
+CREATE TABLE `sys_measurements`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_measurements
+-- ----------------------------
+INSERT INTO `sys_measurements` VALUES (2, '个', '');
+INSERT INTO `sys_measurements` VALUES (3, '箱', '');
+INSERT INTO `sys_measurements` VALUES (4, '条', '');
+INSERT INTO `sys_measurements` VALUES (5, '台', '');
 
 -- ----------------------------
 -- Table structure for sys_permissions
@@ -959,16 +1050,15 @@ CREATE TABLE `sys_permissions`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_posts`;
 CREATE TABLE `sys_posts`  (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `sn` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `name` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `repost` longtext CHARACTER SET utf8 COLLATE utf8_bin,
   `group_id` int(11) DEFAULT NULL,
   `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `sys_posts_group_id_fkey`(`group_id`) USING BTREE,
-  CONSTRAINT `sys_posts_group_id_fkey` FOREIGN KEY (`group_id`) REFERENCES `sys_groups` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+  INDEX `sys_posts_group_id_fkey`(`group_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_posts
@@ -1014,6 +1104,40 @@ INSERT INTO `sys_roles` VALUES (1, 'admin', NULL);
 INSERT INTO `sys_roles` VALUES (2, 'user', NULL);
 
 -- ----------------------------
+-- Table structure for sys_types
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_types`;
+CREATE TABLE `sys_types`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_types
+-- ----------------------------
+INSERT INTO `sys_types` VALUES (1, '传感设备', '123');
+INSERT INTO `sys_types` VALUES (2, '采集设备', '123');
+INSERT INTO `sys_types` VALUES (3, '通用设备', '123');
+
+-- ----------------------------
+-- Table structure for sys_upkeeps
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_upkeeps`;
+CREATE TABLE `sys_upkeeps`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_upkeeps
+-- ----------------------------
+INSERT INTO `sys_upkeeps` VALUES (1, '日常保养', '123');
+
+-- ----------------------------
 -- Table structure for sys_users
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_users`;
@@ -1030,23 +1154,13 @@ CREATE TABLE `sys_users`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `sys_users_group_id_fkey`(`group_id`) USING BTREE,
   INDEX `sys_users_post_id_fkey`(`post_id`) USING BTREE,
-  INDEX `sys_users_role_id_fkey`(`role_id`) USING BTREE,
-  CONSTRAINT `sys_users_group_id_fkey` FOREIGN KEY (`group_id`) REFERENCES `sys_groups` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `sys_users_post_id_fkey` FOREIGN KEY (`post_id`) REFERENCES `sys_posts` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `sys_users_role_id_fkey` FOREIGN KEY (`role_id`) REFERENCES `sys_roles` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  INDEX `sys_users_role_id_fkey`(`role_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_users
 -- ----------------------------
-INSERT INTO `sys_users` VALUES (1, 'baoyibin', 'baoyibin', '123456', 't', 1, 1, 1, '123');
-INSERT INTO `sys_users` VALUES (2, 'zhouyajiao', 'zhouyajiao', '123456', 't', 2, 2, 1, '123');
-INSERT INTO `sys_users` VALUES (3, 'xujianfeng', 'xujianfeng', '123456', 't', 5, 5, 1, '123');
-INSERT INTO `sys_users` VALUES (4, '10000', '测试1', '123456', 't', 5, 5, 2, '123');
-INSERT INTO `sys_users` VALUES (5, '10001', '测试2', '123456', 't', 7, 7, 1, '123');
-INSERT INTO `sys_users` VALUES (6, '10002', '测试3', '123456', 't', 13, 7, 2, '123');
-INSERT INTO `sys_users` VALUES (9, 'liudan', 'liudan', '666666', 't', 1, 1, 2, '');
-INSERT INTO `sys_users` VALUES (10, '223', '32', '3', 'f', 1, 1, 2, '');
+INSERT INTO `sys_users` VALUES (1, 'baoyibin', 'baoyibin', '123456', 'true', 1, 1, 1, '123456');
 
 -- ----------------------------
 -- Table structure for tk_apps
@@ -1466,8 +1580,7 @@ CREATE TABLE `wm_purchase`  (
   `state` longtext CHARACTER SET utf8 COLLATE utf8_bin,
   `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `wm_purchase_user_id_fkey`(`user_id`) USING BTREE,
-  CONSTRAINT `wm_purchase_user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `sys_users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  INDEX `wm_purchase_user_id_fkey`(`user_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -1542,5 +1655,11 @@ CREATE TABLE `wm_stores`  (
 INSERT INTO `wm_stores` VALUES (1, '第三仓库', 'E区', '台部/一大队', '第三仓库E区');
 INSERT INTO `wm_stores` VALUES (2, '第二仓库', 'F区', '台部/二大队', '第二仓库F区');
 INSERT INTO `wm_stores` VALUES (4, '第一仓库', 'A区', '台部/一大队', '第一仓库A区');
+
+-- ----------------------------
+-- View structure for accounts
+-- ----------------------------
+DROP VIEW IF EXISTS `accounts`;
+CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`localhost` SQL SECURITY DEFINER VIEW `accounts` AS select `sys_users`.`id` AS `id`,`sys_users`.`sn` AS `sn`,`sys_users`.`name` AS `name`,`sys_users`.`pwd` AS `pwd`,`sys_users`.`active` AS `active`,`sys_users`.`group_id` AS `group_id`,`sys_users`.`post_id` AS `post_id`,`sys_users`.`role_id` AS `role_id`,`sys_users`.`remark` AS `remark` from `sys_users`;
 
 SET FOREIGN_KEY_CHECKS = 1;
