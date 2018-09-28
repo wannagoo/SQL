@@ -3,15 +3,15 @@
 
  Source Server         : localhost_3306
  Source Server Type    : MySQL
- Source Server Version : 50720
+ Source Server Version : 50717
  Source Host           : localhost:3306
  Source Schema         : wms
 
  Target Server Type    : MySQL
- Target Server Version : 50720
+ Target Server Version : 50717
  File Encoding         : 65001
 
- Date: 05/08/2018 21:06:37
+ Date: 28/09/2018 15:28:33
 */
 
 SET NAMES utf8mb4;
@@ -23,23 +23,19 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `app_approvals`;
 CREATE TABLE `app_approvals`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `app_id` int(11) DEFAULT NULL,
-  `ts` datetime(0) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `state` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `content` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin,
+  `app_id` int(11) NULL DEFAULT NULL,
+  `ts` datetime(0) NULL DEFAULT NULL,
+  `user_id` int(11) NULL DEFAULT NULL,
+  `state` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `content` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of app_approvals
 -- ----------------------------
-INSERT INTO `app_approvals` VALUES (1, 1, '2018-07-30 12:32:51', 1, '拒绝', NULL, '123456');
-INSERT INTO `app_approvals` VALUES (2, 2, '2018-07-31 07:34:20', 1, '同意', NULL, '123456');
-INSERT INTO `app_approvals` VALUES (3, 2, '2018-07-31 07:34:20', 2, '同意', NULL, '123456');
-INSERT INTO `app_approvals` VALUES (5, 4, '2018-07-31 08:20:16', 1, '拒绝', NULL, '123456');
-INSERT INTO `app_approvals` VALUES (6, 5, '2018-08-05 10:37:45', 1, '待审批', NULL, '123456');
+INSERT INTO `app_approvals` VALUES (1, 1, '2018-09-28 07:24:47', 1, '同意', NULL, '123456');
 
 -- ----------------------------
 -- Table structure for app_notices
@@ -47,21 +43,17 @@ INSERT INTO `app_approvals` VALUES (6, 5, '2018-08-05 10:37:45', 1, '待审批',
 DROP TABLE IF EXISTS `app_notices`;
 CREATE TABLE `app_notices`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `app_id` int(11) DEFAULT NULL,
-  `ts` datetime(0) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `state` longtext CHARACTER SET utf8 COLLATE utf8_bin,
+  `app_id` int(11) NULL DEFAULT NULL,
+  `ts` datetime(0) NULL DEFAULT NULL,
+  `user_id` int(11) NULL DEFAULT NULL,
+  `state` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of app_notices
 -- ----------------------------
-INSERT INTO `app_notices` VALUES (1, 1, '2018-07-30 12:32:51', 1, '已查看');
-INSERT INTO `app_notices` VALUES (2, 1, '2018-07-30 12:32:52', 2, '已查看');
-INSERT INTO `app_notices` VALUES (3, 2, '2018-07-31 07:34:20', 1, '已查看');
-INSERT INTO `app_notices` VALUES (4, 2, '2018-07-31 07:34:20', 2, '已查看');
-INSERT INTO `app_notices` VALUES (6, 4, '2018-07-31 08:20:16', 1, '已查看');
+INSERT INTO `app_notices` VALUES (1, 1, '2018-09-28 07:24:47', 1, '已查看');
 
 -- ----------------------------
 -- Table structure for apps
@@ -69,21 +61,19 @@ INSERT INTO `app_notices` VALUES (6, 4, '2018-07-31 08:20:16', 1, '已查看');
 DROP TABLE IF EXISTS `apps`;
 CREATE TABLE `apps`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `kind` longtext CHARACTER SET utf8 COLLATE utf8_bin,
+  `kind` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
   `number` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `ts` datetime(0) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `state` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin,
+  `ts` datetime(0) NULL DEFAULT NULL,
+  `user_id` int(11) NULL DEFAULT NULL,
+  `state` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of apps
 -- ----------------------------
-INSERT INTO `apps` VALUES (2, 'mal', '123123123', '2018-07-31 07:34:20', 1, '审批通过', '123');
-INSERT INTO `apps` VALUES (4, 'eq', 'aaa123', '2018-07-31 08:20:16', 1, '审批拒绝', '123');
-INSERT INTO `apps` VALUES (5, 'eq', '123', '2018-08-05 10:37:45', 1, '待审批', '123');
+INSERT INTO `apps` VALUES (1, 'mal', '111111', '2018-09-28 07:24:47', 1, '审批通过', '123');
 
 -- ----------------------------
 -- Table structure for devices
@@ -93,25 +83,28 @@ CREATE TABLE `devices`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `code` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `name` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `model` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `group_id` int(11) DEFAULT NULL,
-  `group_ids` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `group` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `measurement_id` int(11) DEFAULT NULL,
-  `measurement` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `manufacturer` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `supplier` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `expiration` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `installation` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `state` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin,
+  `model` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `type` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `group_id` int(11) NULL DEFAULT NULL,
+  `group_ids` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `group` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `measurement_id` int(11) NULL DEFAULT NULL,
+  `measurement` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `manufacturer` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `supplier` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `expiration` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `installation` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `state` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of devices
 -- ----------------------------
-INSERT INTO `devices` VALUES (14, '10010', '烟雾探测器', '12345', 5, '1/2/5', '台部/一大队/一中队', 3, '箱', '123', '123', '123', '123', '报废', '123');
+INSERT INTO `devices` VALUES (14, '10010', '烟雾探测器', '12345', '传感设备', 5, '1/2/5', '台部/一大队/一中队', 3, '箱', '123', '123', '123', '2018-09-26T14:17:34.000Z', '报废', '123');
+INSERT INTO `devices` VALUES (15, '10011', '温度探测器', '1111', '采集设备', 10, '1/3/10', '台部/二大队/三中队', 2, '个', '123', '444', '5', '2018-08-30T23:17:50.000Z', '在用', '123');
+INSERT INTO `devices` VALUES (16, '10012', '基站', '111', '通用设备', 5, '1/2/5', '台部/一大队/一中队', 2, '个', '333', '111', '12', '2018-11-01T02:05:43.000Z', '在用', '1');
 
 -- ----------------------------
 -- Table structure for eq_apps
@@ -119,10 +112,10 @@ INSERT INTO `devices` VALUES (14, '10010', '烟雾探测器', '12345', 5, '1/2/5
 DROP TABLE IF EXISTS `eq_apps`;
 CREATE TABLE `eq_apps`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `app_id` int(11) DEFAULT NULL,
-  `eq_id` int(11) DEFAULT NULL,
-  `application` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `reason` longtext CHARACTER SET utf8 COLLATE utf8_bin,
+  `app_id` int(11) NULL DEFAULT NULL,
+  `eq_id` int(11) NULL DEFAULT NULL,
+  `application` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `reason` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
@@ -138,15 +131,15 @@ INSERT INTO `eq_apps` VALUES (2, 5, 14, NULL, NULL);
 DROP TABLE IF EXISTS `mal_apps`;
 CREATE TABLE `mal_apps`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `app_id` int(11) DEFAULT NULL,
-  `mal_id` int(11) DEFAULT NULL,
+  `app_id` int(11) NULL DEFAULT NULL,
+  `mal_id` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of mal_apps
 -- ----------------------------
-INSERT INTO `mal_apps` VALUES (1, 2, 51);
+INSERT INTO `mal_apps` VALUES (1, 1, 1);
 
 -- ----------------------------
 -- Table structure for mal_repair_records
@@ -154,22 +147,14 @@ INSERT INTO `mal_apps` VALUES (1, 2, 51);
 DROP TABLE IF EXISTS `mal_repair_records`;
 CREATE TABLE `mal_repair_records`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `mal_id` int(11) DEFAULT NULL,
-  `content` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `complete` varchar(5) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `report_date` date DEFAULT NULL,
-  `reporter` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin,
+  `mal_id` int(11) NULL DEFAULT NULL,
+  `content` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `complete` varchar(5) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `report_date` date NULL DEFAULT NULL,
+  `reporter` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of mal_repair_records
--- ----------------------------
-INSERT INTO `mal_repair_records` VALUES (9, 51, '发', 'false', '2018-07-19', '132', 'ad');
-INSERT INTO `mal_repair_records` VALUES (10, 51, '加工费', 'false', '2018-07-19', '6546', '1');
-INSERT INTO `mal_repair_records` VALUES (11, 51, '拆机看看看', 'false', '2018-07-26', 'binbin', '是');
-INSERT INTO `mal_repair_records` VALUES (13, 51, '123', 'true', '2018-08-05', '123', '123');
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for mal_reports
@@ -177,24 +162,24 @@ INSERT INTO `mal_repair_records` VALUES (13, 51, '123', 'true', '2018-08-05', '1
 DROP TABLE IF EXISTS `mal_reports`;
 CREATE TABLE `mal_reports`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `device` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `device_id` int(11) DEFAULT NULL,
-  `hap_date` date DEFAULT NULL,
-  `rep_date` date DEFAULT NULL,
-  `phenomenon` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `disposition` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `cause` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `state` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `reporter` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `report_date` date DEFAULT NULL,
-  `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin,
+  `device` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `device_id` int(11) NULL DEFAULT NULL,
+  `hap_date` date NULL DEFAULT NULL,
+  `rep_date` date NULL DEFAULT NULL,
+  `phenomenon` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `disposition` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `cause` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `state` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `reporter` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `report_date` date NULL DEFAULT NULL,
+  `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 52 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of mal_reports
 -- ----------------------------
-INSERT INTO `mal_reports` VALUES (51, '烟雾探测器', 14, '2018-07-28', '2018-07-29', '123', 'zzzzzzzzzzzzzzzzzzzz', 'ccccccccccccccccccccc', '未修复', 'wwwwwwwwwwwwww', '2018-07-30', 'zzzzzzzzzz');
+INSERT INTO `mal_reports` VALUES (1, '烟雾探测器', 14, '2018-09-28', '2018-09-28', '111', '333', '222', '未修复', '123', '2018-09-28', '321');
 
 -- ----------------------------
 -- Table structure for mt_cycles
@@ -203,20 +188,21 @@ DROP TABLE IF EXISTS `mt_cycles`;
 CREATE TABLE `mt_cycles`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `year` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `cycle` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `major` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `department` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `principal` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `type` longtext CHARACTER SET utf8 COLLATE utf8_bin,
+  `cycle` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `major` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `department` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `principal` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `type` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 70 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 71 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of mt_cycles
 -- ----------------------------
-INSERT INTO `mt_cycles` VALUES (68, '2018', '周保养', '传感设备', NULL, '张三', 'xxx', '烟雾传感器');
-INSERT INTO `mt_cycles` VALUES (69, '2018', '周保养', '通用设备', NULL, '张三', '123', '区空调');
+INSERT INTO `mt_cycles` VALUES (68, '2018', '每周保养', '传感设备', NULL, '张三', 'xxx', '烟雾传感器');
+INSERT INTO `mt_cycles` VALUES (69, '2018', '每周保养', '通用设备', NULL, '张三', '123', '区空调');
+INSERT INTO `mt_cycles` VALUES (70, '2018', '月度维护', '采集设备', NULL, '111', '111', '仪器');
 
 -- ----------------------------
 -- Table structure for mt_cycles_items
@@ -224,11 +210,11 @@ INSERT INTO `mt_cycles` VALUES (69, '2018', '周保养', '通用设备', NULL, '
 DROP TABLE IF EXISTS `mt_cycles_items`;
 CREATE TABLE `mt_cycles_items`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `cycles_id` int(11) DEFAULT NULL,
-  `standard` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `content` longtext CHARACTER SET utf8 COLLATE utf8_bin,
+  `cycles_id` int(11) NULL DEFAULT NULL,
+  `standard` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `content` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 50 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 52 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of mt_cycles_items
@@ -263,6 +249,8 @@ INSERT INTO `mt_cycles_items` VALUES (45, 69, '机柜内电线电缆触碰坚固
 INSERT INTO `mt_cycles_items` VALUES (46, 69, '电机状态良好，运行时温度在90度以下', '风机状态');
 INSERT INTO `mt_cycles_items` VALUES (47, 69, '风管无损破、无漏风，安装稳固、无灰', '风管状态');
 INSERT INTO `mt_cycles_items` VALUES (49, 68, 'xxx', '检查三');
+INSERT INTO `mt_cycles_items` VALUES (50, 70, '123', 'sss');
+INSERT INTO `mt_cycles_items` VALUES (51, 70, '123', 'qqq');
 
 -- ----------------------------
 -- Table structure for mt_docs
@@ -271,24 +259,24 @@ DROP TABLE IF EXISTS `mt_docs`;
 CREATE TABLE `mt_docs`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `major` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `department` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `department_ids` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `path` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `create_time` datetime(0) DEFAULT NULL,
-  `create_by` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `mod_time` datetime(0) DEFAULT NULL,
-  `mod_by` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin,
+  `major` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `department` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `department_ids` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `path` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `create_time` datetime(0) NULL DEFAULT NULL,
+  `create_by` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `mod_time` datetime(0) NULL DEFAULT NULL,
+  `mod_by` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of mt_docs
 -- ----------------------------
-INSERT INTO `mt_docs` VALUES (7, '维护规程_1005', '测试专业', '台部/一大队/一中队', '1/2/5', '摄像头地址.txt', '2018-06-20 10:09:26', 'zhouyajiao', '2018-07-27 08:01:06', 'aaa', '备注_1005\n');
-INSERT INTO `mt_docs` VALUES (8, '维护规程_1006', '测试专业', '台部/一大队/二中队', '1/2/6', 'QT页面链接.xls', '2018-06-20 10:10:31', 'baoyibin', '2018-07-27 07:41:26', '123', '备注_1006\n');
-INSERT INTO `mt_docs` VALUES (10, '维护规程_1007', '柴油机', '台部/一大队/一中队', '1/2/5', '安防系统对接规范V1.3.pdf', '2018-07-17 09:03:09', 'baoyibin', '2018-07-27 07:41:11', '123', '222');
+INSERT INTO `mt_docs` VALUES (7, '维护规程_1005', '测试专业', '台部/一大队/一中队', '1/2/5', '摄像头地址.txt', '2018-06-20 10:09:26', '123', '2018-07-27 08:01:06', 'aaa', '备注_1005\n');
+INSERT INTO `mt_docs` VALUES (8, '维护规程_1006', '测试专业', '台部/一大队/二中队', '1/2/6', 'QT页面链接.xls', '2018-06-20 10:10:31', '123', '2018-07-27 07:41:26', '123', '备注_1006\n');
+INSERT INTO `mt_docs` VALUES (10, '维护规程_1007', '柴油机', '台部/一大队/一中队', '1/2/5', '安防系统对接规范V1.3.pdf', '2018-07-17 09:03:09', '123', '2018-07-27 07:41:11', '123', '222');
 INSERT INTO `mt_docs` VALUES (12, '维护规程_1004', '通用设备', '台部/三大队/三中队', '1/4/13', 'Conference notice.pdf', '2018-07-27 09:19:34', '123', '2018-07-27 09:31:44', '123', '123');
 
 -- ----------------------------
@@ -297,11 +285,11 @@ INSERT INTO `mt_docs` VALUES (12, '维护规程_1004', '通用设备', '台部/�
 DROP TABLE IF EXISTS `mt_plan_items`;
 CREATE TABLE `mt_plan_items`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `plan_id` int(11) DEFAULT NULL,
-  `standard` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `content` longtext CHARACTER SET utf8 COLLATE utf8_bin,
+  `plan_id` int(11) NULL DEFAULT NULL,
+  `standard` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `content` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of mt_plan_items
@@ -316,6 +304,14 @@ INSERT INTO `mt_plan_items` VALUES (12, NULL, 'xxx', '检查三');
 INSERT INTO `mt_plan_items` VALUES (13, 10, 'xxx', '检查一');
 INSERT INTO `mt_plan_items` VALUES (14, 10, 'xxx', '检查二');
 INSERT INTO `mt_plan_items` VALUES (15, 10, 'xxx', '检查三');
+INSERT INTO `mt_plan_items` VALUES (16, 11, '123', 'sss');
+INSERT INTO `mt_plan_items` VALUES (17, 11, '123', 'qqq');
+INSERT INTO `mt_plan_items` VALUES (18, 11, '123', 'sss');
+INSERT INTO `mt_plan_items` VALUES (19, 11, '123', 'qqq');
+INSERT INTO `mt_plan_items` VALUES (20, 12, '123', 'sss');
+INSERT INTO `mt_plan_items` VALUES (21, 12, '123', 'qqq');
+INSERT INTO `mt_plan_items` VALUES (22, 13, '123', 'sss');
+INSERT INTO `mt_plan_items` VALUES (23, 13, '123', 'qqq');
 
 -- ----------------------------
 -- Table structure for mt_plans
@@ -324,24 +320,26 @@ DROP TABLE IF EXISTS `mt_plans`;
 CREATE TABLE `mt_plans`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `cycle` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `major` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `year` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `type` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `department` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `principal` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `report_date` date DEFAULT NULL,
-  `reporter` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin,
+  `cycle` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `major` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `year` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `type` int(11) NULL DEFAULT NULL,
+  `typeName` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `department` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `principal` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `report_date` date NULL DEFAULT NULL,
+  `reporter` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of mt_plans
 -- ----------------------------
-INSERT INTO `mt_plans` VALUES (6, '123', '周保养', '传感设备', '2018', '烟雾传感器', NULL, NULL, '2018-07-25', '123', '123');
-INSERT INTO `mt_plans` VALUES (7, '空调1', '周保养', '通用设备', '2018', '69', NULL, NULL, '2018-07-26', '123', '123');
-INSERT INTO `mt_plans` VALUES (10, '123', '周保养', '传感设备', '2018', '68', NULL, NULL, '2018-07-27', '123', '123');
+INSERT INTO `mt_plans` VALUES (6, '烟雾探测器', '每周保养', '传感设备', '2018', 68, '烟雾传感器', NULL, NULL, '2018-07-25', '123', '123');
+INSERT INTO `mt_plans` VALUES (7, '温度探测器', '每周保养', '通用设备', '2018', 69, '区空调', NULL, NULL, '2018-07-26', '123', '123');
+INSERT INTO `mt_plans` VALUES (12, '基站', '月度维护', '采集设备', '2018', 70, '仪器', NULL, NULL, '2018-09-27', '123', '123');
+INSERT INTO `mt_plans` VALUES (13, '烟雾探测器', '月度维护', '采集设备', '2018', 70, '仪器', NULL, NULL, '2018-09-28', '123', '123');
 
 -- ----------------------------
 -- Table structure for mt_record_items
@@ -349,17 +347,17 @@ INSERT INTO `mt_plans` VALUES (10, '123', '周保养', '传感设备', '2018', '
 DROP TABLE IF EXISTS `mt_record_items`;
 CREATE TABLE `mt_record_items`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `plan_id` int(11) DEFAULT NULL,
-  `name` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `standard` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `content` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `restand` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `trouble` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `report_date` date DEFAULT NULL,
-  `reporter` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin,
+  `plan_id` int(11) NULL DEFAULT NULL,
+  `name` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `standard` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `content` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `restand` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `trouble` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `report_date` date NULL DEFAULT NULL,
+  `reporter` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of mt_record_items
@@ -373,6 +371,10 @@ INSERT INTO `mt_record_items` VALUES (23, 6, '123', 'xxx', '检查一', 'false',
 INSERT INTO `mt_record_items` VALUES (24, 6, '123', 'xxx', '检查一', 'false', '123', '2018-07-27', 'aaa', 'vvv');
 INSERT INTO `mt_record_items` VALUES (25, 6, '123', 'xxx', '检查一', 'true', '123', '2018-07-27', 'aa', 'vvxz');
 INSERT INTO `mt_record_items` VALUES (26, 6, '123', 'xxx', '检查二', 'true', '123', '2018-07-27', 'aa', 'vvxz');
+INSERT INTO `mt_record_items` VALUES (27, 12, '仪器1', '123', 'sss', 'true', '123', '2018-09-27', '123', '123');
+INSERT INTO `mt_record_items` VALUES (28, 12, '仪器1', '123', 'qqq', 'true', '123', '2018-09-27', '123', '123');
+INSERT INTO `mt_record_items` VALUES (29, 12, '仪器1', '123', 'sss', 'false', '123', '2018-09-27', '123', '123');
+INSERT INTO `mt_record_items` VALUES (30, 12, '仪器1', '123', 'qqq', 'false', '123', '2018-09-27', '123', '123');
 
 -- ----------------------------
 -- Table structure for sys_btypes
@@ -380,15 +382,15 @@ INSERT INTO `mt_record_items` VALUES (26, 6, '123', 'xxx', '检查二', 'true', 
 DROP TABLE IF EXISTS `sys_btypes`;
 CREATE TABLE `sys_btypes`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `enterprise` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `contacts` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `phone` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `faxes` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `taxId` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `bank` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `enterprise` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `contacts` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `phone` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `faxes` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `taxId` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `bank` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
@@ -403,8 +405,8 @@ INSERT INTO `sys_btypes` VALUES (1, '123456', '123333', '123', '123', '123', '12
 DROP TABLE IF EXISTS `sys_conditions`;
 CREATE TABLE `sys_conditions`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
@@ -422,10 +424,10 @@ INSERT INTO `sys_conditions` VALUES (4, '报废', '123');
 DROP TABLE IF EXISTS `sys_groups`;
 CREATE TABLE `sys_groups`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `parent_id` int(11) DEFAULT NULL,
+  `parent_id` int(11) NULL DEFAULT NULL,
   `sn` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `name` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin,
+  `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `sys_groups_parent_id_fkey`(`parent_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
@@ -458,7 +460,7 @@ DROP TABLE IF EXISTS `sys_logs`;
 CREATE TABLE `sys_logs`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ts` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `data` json,
+  `data` json NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 160 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
@@ -485,8 +487,8 @@ INSERT INTO `sys_logs` VALUES (159, '2018-07-15 07:37:36', '{\"ip\": \"::ffff:12
 DROP TABLE IF EXISTS `sys_maintains`;
 CREATE TABLE `sys_maintains`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
@@ -502,8 +504,8 @@ INSERT INTO `sys_maintains` VALUES (2, '计划项目维修', '123');
 DROP TABLE IF EXISTS `sys_malfunctions`;
 CREATE TABLE `sys_malfunctions`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
@@ -521,8 +523,8 @@ INSERT INTO `sys_malfunctions` VALUES (4, '其他', '123');
 DROP TABLE IF EXISTS `sys_measurements`;
 CREATE TABLE `sys_measurements`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
@@ -541,11 +543,11 @@ DROP TABLE IF EXISTS `sys_permissions`;
 CREATE TABLE `sys_permissions`  (
   `id` int(11) NOT NULL,
   `name` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `active` varchar(5) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `kind` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `action` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `resource` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin,
+  `active` varchar(5) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `kind` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `action` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `resource` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
@@ -555,8 +557,8 @@ CREATE TABLE `sys_permissions`  (
 DROP TABLE IF EXISTS `sys_role_permission`;
 CREATE TABLE `sys_role_permission`  (
   `id` int(11) NOT NULL,
-  `role_id` int(11) DEFAULT NULL,
-  `permission_id` int(11) DEFAULT NULL,
+  `role_id` int(11) NULL DEFAULT NULL,
+  `permission_id` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `sys_role_permission_permission_id_fkey`(`permission_id`) USING BTREE,
   INDEX `sys_role_permission_role_id_fkey`(`role_id`) USING BTREE,
@@ -571,7 +573,7 @@ DROP TABLE IF EXISTS `sys_roles`;
 CREATE TABLE `sys_roles`  (
   `id` int(11) NOT NULL,
   `name` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin,
+  `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
@@ -588,7 +590,7 @@ DROP TABLE IF EXISTS `sys_types`;
 CREATE TABLE `sys_types`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin,
+  `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
@@ -605,15 +607,17 @@ INSERT INTO `sys_types` VALUES (3, '通用设备', '123');
 DROP TABLE IF EXISTS `sys_upkeeps`;
 CREATE TABLE `sys_upkeeps`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_upkeeps
 -- ----------------------------
-INSERT INTO `sys_upkeeps` VALUES (1, '日常保养', '123');
+INSERT INTO `sys_upkeeps` VALUES (1, '日常擦拭', '123');
+INSERT INTO `sys_upkeeps` VALUES (2, '每周保养', '123');
+INSERT INTO `sys_upkeeps` VALUES (3, '月度维护', '123');
 
 -- ----------------------------
 -- Table structure for sys_users
@@ -624,13 +628,13 @@ CREATE TABLE `sys_users`  (
   `sn` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `name` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `pwd` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `active` varchar(5) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `group` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `group_ids` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `role` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `token` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `date` longtext CHARACTER SET utf8 COLLATE utf8_bin,
+  `active` varchar(5) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `group` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `group_ids` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `role` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `token` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `date` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
@@ -639,6 +643,6 @@ CREATE TABLE `sys_users`  (
 -- ----------------------------
 INSERT INTO `sys_users` VALUES (1, 'baoyibin', 'baoyibin', '123456', 'true', '台部/一大队/一中队', '1/2/5', '1', '123456', 'V1ArNzGI8xqRvDN7E6flaPFx7WriTNMNTyc863GWF48', '2018-08-05 19:54:39');
 INSERT INTO `sys_users` VALUES (2, 'user', 'user', '123456', 'true', '台部/一大队/一中队', '1/2/5', '1', '123456', NULL, NULL);
-INSERT INTO `sys_users` VALUES (3, 'admin', 'admin', '1111111', 'true', '台部/一大队/一中队', '1/2/5', '1', '123456', 'VbCt9vAh66NH4f7mfkqeP2B69d7yxrBJtsIlVjpntnc', '2018-08-05 21:05:58');
+INSERT INTO `sys_users` VALUES (3, 'admin', 'admin', '1111111', 'true', '台部/一大队/一中队', '1/2/5', '1', '123456', 'tI0oQdDsib1nqOIZ3x_sDXF40mPbOmGr-Yw8VbToHFs', '2018-09-28 13:52:52');
 
 SET FOREIGN_KEY_CHECKS = 1;
