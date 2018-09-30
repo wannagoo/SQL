@@ -11,7 +11,7 @@
  Target Server Version : 50717
  File Encoding         : 65001
 
- Date: 28/09/2018 15:28:33
+ Date: 30/09/2018 17:04:48
 */
 
 SET NAMES utf8mb4;
@@ -30,12 +30,23 @@ CREATE TABLE `app_approvals`  (
   `content` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
   `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of app_approvals
 -- ----------------------------
 INSERT INTO `app_approvals` VALUES (1, 1, '2018-09-28 07:24:47', 1, '同意', NULL, '123456');
+INSERT INTO `app_approvals` VALUES (2, 2, '2018-09-28 09:30:23', 1, '待审批', NULL, '123456');
+INSERT INTO `app_approvals` VALUES (3, 3, '2018-09-30 06:08:07', 1, '同意', NULL, '123456');
+INSERT INTO `app_approvals` VALUES (4, 4, '2018-09-30 06:09:30', 1, '拒绝', NULL, '123456');
+INSERT INTO `app_approvals` VALUES (5, 5, '2018-09-30 07:26:36', 1, '同意', NULL, '123456');
+INSERT INTO `app_approvals` VALUES (6, 6, '2018-09-30 07:48:46', 1, '待审批', NULL, '123456');
+INSERT INTO `app_approvals` VALUES (7, 7, '2018-09-30 07:52:38', 1, '同意', NULL, '123456');
+INSERT INTO `app_approvals` VALUES (8, 8, '2018-09-30 07:53:33', 1, '同意', NULL, '123456');
+INSERT INTO `app_approvals` VALUES (9, 9, '2018-09-30 07:54:25', 1, '同意', NULL, '123456');
+INSERT INTO `app_approvals` VALUES (10, 10, '2018-09-30 07:55:42', 1, '同意', NULL, '123456');
+INSERT INTO `app_approvals` VALUES (11, 11, '2018-09-30 07:58:41', 1, '待审批', NULL, '123456');
+INSERT INTO `app_approvals` VALUES (12, 12, '2018-09-30 08:12:08', 1, '同意', NULL, '123456');
 
 -- ----------------------------
 -- Table structure for app_notices
@@ -48,12 +59,14 @@ CREATE TABLE `app_notices`  (
   `user_id` int(11) NULL DEFAULT NULL,
   `state` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of app_notices
 -- ----------------------------
 INSERT INTO `app_notices` VALUES (1, 1, '2018-09-28 07:24:47', 1, '已查看');
+INSERT INTO `app_notices` VALUES (2, 2, '2018-09-28 09:30:23', 1, '待查看');
+INSERT INTO `app_notices` VALUES (3, 4, '2018-09-30 06:09:30', 1, '待查看');
 
 -- ----------------------------
 -- Table structure for apps
@@ -68,12 +81,23 @@ CREATE TABLE `apps`  (
   `state` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
   `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of apps
 -- ----------------------------
 INSERT INTO `apps` VALUES (1, 'mal', '111111', '2018-09-28 07:24:47', 1, '审批通过', '123');
+INSERT INTO `apps` VALUES (2, 'mal', '123123', '2018-09-28 09:30:23', 1, '待审批', '123');
+INSERT INTO `apps` VALUES (3, 'mal', '123', '2018-09-30 06:08:07', 1, '审批通过', '123');
+INSERT INTO `apps` VALUES (4, 'mal', '333', '2018-09-30 06:09:30', 1, '审批拒绝', '123');
+INSERT INTO `apps` VALUES (5, 'eq', '123', '2018-09-30 07:26:36', 1, '审批通过', '123');
+INSERT INTO `apps` VALUES (6, 'mal', '123', '2018-09-30 07:48:46', 1, '待审批', '123');
+INSERT INTO `apps` VALUES (7, 'eq', '123', '2018-09-30 07:52:38', 1, '审批通过', '123');
+INSERT INTO `apps` VALUES (8, 'eq', '123', '2018-09-30 07:53:33', 1, '审批通过', '123');
+INSERT INTO `apps` VALUES (9, 'eq', '123', '2018-09-30 07:54:25', 1, '审批通过', '123');
+INSERT INTO `apps` VALUES (10, 'eq', '123', '2018-09-30 07:55:42', 1, '审批通过', '123');
+INSERT INTO `apps` VALUES (11, 'eq', '123', '2018-09-30 07:58:41', 1, '待审批', '123');
+INSERT INTO `apps` VALUES (12, 'eq', '123', '2018-09-30 08:12:08', 1, '审批通过', '123');
 
 -- ----------------------------
 -- Table structure for devices
@@ -103,7 +127,7 @@ CREATE TABLE `devices`  (
 -- Records of devices
 -- ----------------------------
 INSERT INTO `devices` VALUES (14, '10010', '烟雾探测器', '12345', '传感设备', 5, '1/2/5', '台部/一大队/一中队', 3, '箱', '123', '123', '123', '2018-09-26T14:17:34.000Z', '报废', '123');
-INSERT INTO `devices` VALUES (15, '10011', '温度探测器', '1111', '采集设备', 10, '1/3/10', '台部/二大队/三中队', 2, '个', '123', '444', '5', '2018-08-30T23:17:50.000Z', '在用', '123');
+INSERT INTO `devices` VALUES (15, '10011', '温度探测器', '1111', '采集设备', 10, '1/3/10', '台部/二大队/三中队', 2, '个', '123', '444', '5', '2018-08-30T23:17:50.000Z', '报废', '123');
 INSERT INTO `devices` VALUES (16, '10012', '基站', '111', '通用设备', 5, '1/2/5', '台部/一大队/一中队', 2, '个', '333', '111', '12', '2018-11-01T02:05:43.000Z', '在用', '1');
 
 -- ----------------------------
@@ -117,13 +141,18 @@ CREATE TABLE `eq_apps`  (
   `application` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
   `reason` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of eq_apps
 -- ----------------------------
-INSERT INTO `eq_apps` VALUES (1, 4, 14, NULL, NULL);
-INSERT INTO `eq_apps` VALUES (2, 5, 14, NULL, NULL);
+INSERT INTO `eq_apps` VALUES (3, 5, 15, NULL, NULL);
+INSERT INTO `eq_apps` VALUES (4, 7, 15, NULL, NULL);
+INSERT INTO `eq_apps` VALUES (5, 8, 15, NULL, NULL);
+INSERT INTO `eq_apps` VALUES (6, 9, 15, NULL, NULL);
+INSERT INTO `eq_apps` VALUES (7, 10, 15, NULL, NULL);
+INSERT INTO `eq_apps` VALUES (8, 11, 15, NULL, NULL);
+INSERT INTO `eq_apps` VALUES (9, 12, 15, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for mal_apps
@@ -134,12 +163,16 @@ CREATE TABLE `mal_apps`  (
   `app_id` int(11) NULL DEFAULT NULL,
   `mal_id` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of mal_apps
 -- ----------------------------
 INSERT INTO `mal_apps` VALUES (1, 1, 1);
+INSERT INTO `mal_apps` VALUES (2, 2, 1);
+INSERT INTO `mal_apps` VALUES (3, 3, 2);
+INSERT INTO `mal_apps` VALUES (4, 4, 3);
+INSERT INTO `mal_apps` VALUES (5, 6, 4);
 
 -- ----------------------------
 -- Table structure for mal_repair_records
@@ -154,7 +187,16 @@ CREATE TABLE `mal_repair_records`  (
   `reporter` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
   `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of mal_repair_records
+-- ----------------------------
+INSERT INTO `mal_repair_records` VALUES (1, 1, '111', 'true', '2018-09-28', '123', '111');
+INSERT INTO `mal_repair_records` VALUES (8, 2, '123', 'false', '2018-09-30', '123', '123');
+INSERT INTO `mal_repair_records` VALUES (9, 2, '123', 'false', '2018-09-30', '123', '123');
+INSERT INTO `mal_repair_records` VALUES (10, 2, '123', 'false', '2018-09-30', '123', '123');
+INSERT INTO `mal_repair_records` VALUES (11, 2, '123', 'true', '2018-09-30', '123', '123');
 
 -- ----------------------------
 -- Table structure for mal_reports
@@ -174,12 +216,15 @@ CREATE TABLE `mal_reports`  (
   `report_date` date NULL DEFAULT NULL,
   `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of mal_reports
 -- ----------------------------
-INSERT INTO `mal_reports` VALUES (1, '烟雾探测器', 14, '2018-09-28', '2018-09-28', '111', '333', '222', '未修复', '123', '2018-09-28', '321');
+INSERT INTO `mal_reports` VALUES (2, '烟雾探测器', 14, '2018-09-30', '2018-09-30', '111', '333', '222', '已修复', 'zzz', '2018-09-30', 'xxx');
+INSERT INTO `mal_reports` VALUES (3, '温度探测器', 15, '2018-09-30', '2018-09-30', '222', '444', '333', '未修复', 'aaa', '2018-09-30', '333');
+INSERT INTO `mal_reports` VALUES (4, '基站', 16, '2018-09-30', '2018-09-30', '333', '555', '444', '未修复', 'rrr', '2018-09-30', '111');
+INSERT INTO `mal_reports` VALUES (5, '烟雾探测器', 14, '2018-09-30', '2018-09-30', '444', '666', '555', '未修复', 'yyy', '2018-09-30', 'bbb');
 
 -- ----------------------------
 -- Table structure for mt_cycles
@@ -269,7 +314,7 @@ CREATE TABLE `mt_docs`  (
   `mod_by` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
   `remark` longtext CHARACTER SET utf8 COLLATE utf8_bin NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of mt_docs
@@ -278,6 +323,8 @@ INSERT INTO `mt_docs` VALUES (7, '维护规程_1005', '测试专业', '台部/�
 INSERT INTO `mt_docs` VALUES (8, '维护规程_1006', '测试专业', '台部/一大队/二中队', '1/2/6', 'QT页面链接.xls', '2018-06-20 10:10:31', '123', '2018-07-27 07:41:26', '123', '备注_1006\n');
 INSERT INTO `mt_docs` VALUES (10, '维护规程_1007', '柴油机', '台部/一大队/一中队', '1/2/5', '安防系统对接规范V1.3.pdf', '2018-07-17 09:03:09', '123', '2018-07-27 07:41:11', '123', '222');
 INSERT INTO `mt_docs` VALUES (12, '维护规程_1004', '通用设备', '台部/三大队/三中队', '1/4/13', 'Conference notice.pdf', '2018-07-27 09:19:34', '123', '2018-07-27 09:31:44', '123', '123');
+INSERT INTO `mt_docs` VALUES (14, '烟雾探测器', '传感设备', '台部/一大队/一中队', '1/2/5', '全国行政区信息（含边界）.txt', '2018-09-30 03:38:08', '123', '2018-09-30 03:50:13', '333', '111');
+INSERT INTO `mt_docs` VALUES (15, '基站', '采集设备', '台部/一大队/一中队', '1/2/5', '用户名密码下发.xlsx', '2018-09-30 03:43:36', 'qqq', '2018-09-30 05:57:41', '111', '111');
 
 -- ----------------------------
 -- Table structure for mt_plan_items
@@ -641,8 +688,7 @@ CREATE TABLE `sys_users`  (
 -- ----------------------------
 -- Records of sys_users
 -- ----------------------------
-INSERT INTO `sys_users` VALUES (1, 'baoyibin', 'baoyibin', '123456', 'true', '台部/一大队/一中队', '1/2/5', '1', '123456', 'V1ArNzGI8xqRvDN7E6flaPFx7WriTNMNTyc863GWF48', '2018-08-05 19:54:39');
-INSERT INTO `sys_users` VALUES (2, 'user', 'user', '123456', 'true', '台部/一大队/一中队', '1/2/5', '1', '123456', NULL, NULL);
-INSERT INTO `sys_users` VALUES (3, 'admin', 'admin', '1111111', 'true', '台部/一大队/一中队', '1/2/5', '1', '123456', 'tI0oQdDsib1nqOIZ3x_sDXF40mPbOmGr-Yw8VbToHFs', '2018-09-28 13:52:52');
+INSERT INTO `sys_users` VALUES (1, 'admin', 'admin', '111111', 'true', '台部/一大队/一中队', '1/2/5', '1', '123456', 'zcUKZYDoIv8LVv3u4WP6inxbFSFgP0qm_L9Mj4Rmz6M', '2018-09-30 17:03:28');
+INSERT INTO `sys_users` VALUES (2, 'user', 'user', '111111', 'true', '台部/一大队/一中队', '1/2/5', '1', '123456', NULL, NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
